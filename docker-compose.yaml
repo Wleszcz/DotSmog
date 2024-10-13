@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # .NET App
+  app:
+    build:
+      context: .
+      dockerfile: DotSmog/Dockerfile
+    ports:
+      - "5275:8080"
+
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__MongoDb=mongodb://mongo:27017/smogdb
+      - RabbitMQ__HostName=rabbitmq
+    depends_on:
+      - rabbitmq
+      - mongo
+
+  # RabbitMQ
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"  # Port for AMQP communication
+      - "15672:15672"  # Port for admin panel
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+
+  # MongoDB
+  mongo:
+    image: mongo:6.0
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:

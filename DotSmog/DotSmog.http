@@ -1,0 +1,6 @@
+@DotSmog_HostAddress = http://localhost:5275
+
+GET {{DotSmog_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
