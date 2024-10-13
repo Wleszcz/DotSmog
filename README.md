@@ -28,7 +28,7 @@
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/dotsmog.git
+git clone https://github.com/Wleszcz/DotSmog.git
 cd dotsmog
 ```
 
