@@ -55,7 +55,6 @@ class Connector
                 );
 
                 var consumer = new EventingBasicConsumer(channel);
-
                 consumer.Received += (model, ea) =>
                 {
                     var body = ea.Body.ToArray();
@@ -67,7 +66,6 @@ class Connector
 
                 var waitHandle = new ManualResetEvent(false);  
                 waitHandle.WaitOne(); 
-            
             }
         }
     }
