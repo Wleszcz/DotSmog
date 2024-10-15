@@ -33,3 +33,16 @@
 /home/wiktor/DotSmog/DotSmog/obj/Debug/net8.0/DotSmog.genruntimeconfig.cache
 /home/wiktor/DotSmog/DotSmog/obj/Debug/net8.0/ref/DotSmog.dll
 /home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/RabbitMQ.Client.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/AWSSDK.Core.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/AWSSDK.SecurityToken.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/DnsClient.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/MongoDB.Bson.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/MongoDB.Driver.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/MongoDB.Driver.Core.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/MongoDB.Libmongocrypt.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/SharpCompress.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Snappier.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/ZstdSharp.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/runtimes/linux/native/libmongocrypt.so
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/runtimes/osx/native/libmongocrypt.dylib
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/runtimes/win/native/mongocrypt.dll
