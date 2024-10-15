@@ -1,3 +1,6 @@
+var connector = new Connector();
+connector.StartListening();
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

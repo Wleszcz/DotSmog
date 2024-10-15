@@ -32,3 +32,4 @@
 /home/wiktor/DotSmog/DotSmog/obj/Debug/net8.0/DotSmog.pdb
 /home/wiktor/DotSmog/DotSmog/obj/Debug/net8.0/DotSmog.genruntimeconfig.cache
 /home/wiktor/DotSmog/DotSmog/obj/Debug/net8.0/ref/DotSmog.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/RabbitMQ.Client.dll
