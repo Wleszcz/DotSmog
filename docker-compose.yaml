@@ -12,7 +12,11 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__MongoDb=mongodb://mongo:27017/smogdb
+      
+      - RabbitMQ__QueueName=sensorQueue
       - RabbitMQ__HostName=rabbitmq
+      - RabbitMQ__UserName=guest
+      - RabbitMQ__Password=guest
     depends_on:
       - rabbitmq
       - mongo
