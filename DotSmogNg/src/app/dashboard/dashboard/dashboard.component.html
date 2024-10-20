@@ -1,1 +1,57 @@
-<p>dashboard works!</p>
+<div class="dashboard">
+  <header class="dashboard-header">
+    <h1>DotSmog Dashboard</h1>
+  </header>
+  <main class="dashboard-content">
+    <section class="filters">
+      <h2>Filters</h2>
+      <label for="date-filter">Date:</label>
+      <input type="date" id="date-filter" />
+      <label for="sensor-type-filter">Sensor Type:</label>
+      <select id="sensor-type-filter">
+        <option value="all">All</option>
+        <!-- Add sensor types here -->
+      </select>
+      <label for="sensor-instance-filter">Sensor Instance:</label>
+      <select id="sensor-instance-filter">
+        <option value="all">All</option>
+        <!-- Add sensor instances here -->
+      </select>
+    </section>
+    <section class="data-table">
+      <h2>Data Table</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Sensor Type</th>
+            <th>Sensor Instance</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data rows go here -->
+        </tbody>
+      </table>
+    </section>
+    <section class="download-options">
+      <h2>Download Data</h2>
+      <button id="download-csv">Download CSV</button>
+      <button id="download-json">Download JSON</button>
+    </section>
+    <section class="charts">
+      <h2>Charts</h2>
+      <!-- Chart elements go here -->
+    </section>
+    <section class="real-time-data">
+      <h2>Real-Time Data</h2>
+      <div class="sensor-data">
+        <p>Last Value: <span id="last-value">N/A</span></p>
+        <p>Average Value (last 100): <span id="average-value">N/A</span></p>
+      </div>
+    </section>
+  </main>
+  <footer class="dashboard-footer">
+    <p>&copy; 2024 DotSmog</p>
+  </footer>
+</div>
