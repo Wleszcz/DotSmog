@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MongoDB.Bson;
+using System.Text.Json;
+using DotSmog;
+using DotSmog.src;
 
 namespace DotSmog
 {
@@ -14,6 +17,7 @@ namespace DotSmog
         private readonly IModel _channel;
         private readonly string _queueName;
         private readonly int _retryDelay;
+        public static String collectionName = "sensorMessages";
 
         public QueueConnector( int retryDelay = 5000)
         {
@@ -68,8 +72,10 @@ namespace DotSmog
 
                 try
                 {
-                    BsonDocument newDocument = BsonDocument.Parse(message);
-                    await ProcessMessageAsync(dbConnector, newDocument);
+                    SensorMessage sensorMessage = JsonSerializer.Deserialize<SensorMessage>(message);
+         
+                    await ProcessMessageAsync(dbConnector, sensorMessage);
+                    _channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
                 }
                 catch (Exception ex)
                 {
@@ -85,10 +91,10 @@ namespace DotSmog
             cancellationToken.Register(() => StopReceiving());
         }
 
-        private async Task ProcessMessageAsync(DBConnector dbConnector, BsonDocument newDocument)
+        private async Task ProcessMessageAsync(DBConnector dbConnector, SensorMessage newDocument)
         {
             // Assuming this is an asynchronous operation
-            await dbConnector.InsertDataAsync("readings", newDocument);
+            await dbConnector.InsertDataAsync(collectionName, newDocument);
         }
 
         public void StopReceiving()

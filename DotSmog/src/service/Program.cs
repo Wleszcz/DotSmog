@@ -1,7 +1,9 @@
 using DotSmog;
+using DotSmog.src;
 using MongoDB.Bson;
 
 var dbConnector = DBConnector.Instance;
+
 
 var queueConnector = new QueueConnector();
 using var cancellationTokenSource = new CancellationTokenSource();
@@ -29,11 +31,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/api/readings", async () =>
+app.MapGet("/api/readings", async (string? type, DateTime? date ,
+    Guid? stationUUID) =>
     {
-        var documents = await dbConnector.GetDataAsync("users");
-        var result = string.Join("\n", documents);
-        return result;
+        var documents = await dbConnector.GetDataAsync(QueueConnector.collectionName, type, date, stationUUID);
+        Messages messages = new Messages();
+        messages.SensorMessages = documents; 
+        return Results.Ok(messages);
     })
     .WithName("readings")
     .WithOpenApi();
