@@ -1343,33 +1343,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Damian\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\kiwin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Damian\\Desktop\\Damian\\VII semestr\\dotNet\\DotSmog\\DotSmog\\DotSmog.csproj",
+      "projectUniqueName": "D:\\Sem7\\DotSmog\\DotSmog\\DotSmog.csproj",
       "projectName": "DotSmog",
-      "projectPath": "C:\\Users\\Damian\\Desktop\\Damian\\VII semestr\\dotNet\\DotSmog\\DotSmog\\DotSmog.csproj",
-      "packagesPath": "C:\\Users\\Damian\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Damian\\Desktop\\Damian\\VII semestr\\dotNet\\DotSmog\\DotSmog\\obj\\",
+      "projectPath": "D:\\Sem7\\DotSmog\\DotSmog\\DotSmog.csproj",
+      "packagesPath": "C:\\Users\\kiwin\\.nuget\\packages\\",
+      "outputPath": "D:\\Sem7\\DotSmog\\DotSmog\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Damian\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\kiwin\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1429,7 +1420,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

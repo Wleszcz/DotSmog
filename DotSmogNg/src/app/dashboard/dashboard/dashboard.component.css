@@ -63,6 +63,8 @@
 }
 
 .charts {
+  max-width: 50%;
+  max-height: 30%;
 }
 
 .real-time-data .sensor-data {
