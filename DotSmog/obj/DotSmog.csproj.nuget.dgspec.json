@@ -13,6 +13,7 @@
         "packagesPath": "C:\\Users\\Damian\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Damian\\Desktop\\Damian\\VII semestr\\dotNet\\DotSmog\\DotSmog\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -57,6 +58,10 @@
             "MongoDB.Driver": {
               "target": "Package",
               "version": "[2.29.0, )"
+            },
+            "Nethereum.Web3": {
+              "target": "Package",
+              "version": "[4.26.0, )"
             },
             "RabbitMQ.Client": {
               "target": "Package",
