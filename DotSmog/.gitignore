@@ -1,6 +1,6 @@
 # .NET Core build results
-bin/
-obj/
+bin/*
+obj/*
 
 # User-specific files
 .idea/
