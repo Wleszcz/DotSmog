@@ -79,9 +79,11 @@ namespace DotSmog
                     SensorMessage sensorMessage = JsonSerializer.Deserialize<SensorMessage>(message);
          
                     await ProcessMessageAsync(dbConnector, sensorMessage);
-                    _channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
-                    
+
                     _tokenService.TransferTo(sensorMessage.StationId);
+                    Console.WriteLine($"Token transferred to: {sensorMessage.StationId}");
+                    
+                    _channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
                 }
                 catch (Exception ex)
                 {

@@ -46,51 +46,75 @@
 /home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/runtimes/linux/native/libmongocrypt.so
 /home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/runtimes/osx/native/libmongocrypt.dylib
 /home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/runtimes/win/native/mongocrypt.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\appsettings.Development.json
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\appsettings.json
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\DotSmog.exe
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\DotSmog.deps.json
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\DotSmog.runtimeconfig.json
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\DotSmog.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\DotSmog.pdb
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\AWSSDK.Core.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\AWSSDK.SecurityToken.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\DnsClient.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\Microsoft.OpenApi.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\MongoDB.Bson.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\MongoDB.Driver.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\MongoDB.Driver.Core.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\MongoDB.Libmongocrypt.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\RabbitMQ.Client.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\SharpCompress.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\Snappier.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\ZstdSharp.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\runtimes\linux\native\libmongocrypt.so
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\runtimes\osx\native\libmongocrypt.dylib
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\bin\Debug\net8.0\runtimes\win\native\mongocrypt.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\DotSmog.csproj.AssemblyReference.cache
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\DotSmog.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\DotSmog.AssemblyInfoInputs.cache
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\DotSmog.AssemblyInfo.cs
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\DotSmog.csproj.CoreCompileInputs.cache
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\DotSmog.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\DotSmog.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\DotSmog.sourcelink.json
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\staticwebassets.build.json
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\staticwebassets.development.json
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\staticwebassets\msbuild.DotSmog.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\staticwebassets\msbuild.build.DotSmog.props
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.DotSmog.props
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.DotSmog.props
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\scopedcss\bundle\DotSmog.styles.css
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\DotSmog.csproj.Up2Date
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\DotSmog.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\refint\DotSmog.dll
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\DotSmog.pdb
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\DotSmog.genruntimeconfig.cache
-C:\Users\Damian\Desktop\Damian\VII semestr\dotNet\DotSmog\DotSmog\obj\Debug\net8.0\ref\DotSmog.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/appsettings.Development.json
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/appsettings.json
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/DotSmog.exe
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/DotSmog.deps.json
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/DotSmog.runtimeconfig.json
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/DotSmog.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/DotSmog.pdb
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/AWSSDK.Core.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/AWSSDK.SecurityToken.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/DnsClient.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/Microsoft.AspNetCore.OpenApi.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/Microsoft.OpenApi.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/MongoDB.Bson.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/MongoDB.Driver.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/MongoDB.Driver.Core.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/MongoDB.Libmongocrypt.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/RabbitMQ.Client.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/SharpCompress.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/Snappier.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/ZstdSharp.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/runtimes/linux/native/libmongocrypt.so
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/runtimes/osx/native/libmongocrypt.dylib
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/bin/Debug/net8.0/runtimes/win/native/mongocrypt.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/DotSmog.csproj.AssemblyReference.cache
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/DotSmog.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/DotSmog.AssemblyInfoInputs.cache
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/DotSmog.AssemblyInfo.cs
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/DotSmog.csproj.CoreCompileInputs.cache
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/DotSmog.MvcApplicationPartsAssemblyInfo.cs
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/DotSmog.MvcApplicationPartsAssemblyInfo.cache
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/DotSmog.sourcelink.json
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/staticwebassets.build.json
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/staticwebassets.development.json
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/staticwebassets/msbuild.DotSmog.Microsoft.AspNetCore.StaticWebAssets.props
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/staticwebassets/msbuild.build.DotSmog.props
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.DotSmog.props
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.DotSmog.props
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/staticwebassets.pack.json
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/scopedcss/bundle/DotSmog.styles.css
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/DotSmog.csproj.Up2Date
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/DotSmog.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/refint/DotSmog.dll
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/DotSmog.pdb
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/DotSmog.genruntimeconfig.cache
+C:/Users/Damian/Desktop/Damian/VII semestr/dotNet/DotSmog/DotSmog/obj/Debug/net8.0/ref/DotSmog.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/ADRaffy.ENSNormalize.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/DotNetEnv.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/NBitcoin.Secp256k1.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Nethereum.ABI.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Nethereum.Accounts.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Nethereum.BlockchainProcessing.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Nethereum.Contracts.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Nethereum.Hex.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Nethereum.JsonRpc.Client.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Nethereum.JsonRpc.RpcClient.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Nethereum.KeyStore.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Nethereum.Merkle.Patricia.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Nethereum.Model.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Nethereum.RLP.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Nethereum.RPC.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Nethereum.Signer.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Nethereum.Signer.EIP712.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Nethereum.Util.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Nethereum.Util.Rest.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Nethereum.Web3.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Newtonsoft.Json.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/BouncyCastle.Crypto.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/Sprache.dll
+/home/wiktor/DotSmog/DotSmog/bin/Debug/net8.0/ContractABI.json

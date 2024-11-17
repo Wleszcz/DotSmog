@@ -37,7 +37,7 @@ public class TokenService
         Env.Load();
         privateKey =
             Environment.GetEnvironmentVariable("PRIVATE_KEY"); // Klucz prywatny do konta w MetaMask dla sieci Holesky
-        if (!String.IsNullOrEmpty(privateKey))
+        if (String.IsNullOrEmpty(privateKey))
         {
             throw new Exception(".env file missing");
         }
@@ -49,6 +49,11 @@ public class TokenService
         // ABI kontraktu ERC-20
         string abiFilePath = "ContractABI.json";
         string abi = File.ReadAllText(abiFilePath);
+        if (String.IsNullOrEmpty(abi))
+        {
+            throw new Exception("ContractABI.json file missing");
+        }
+
         contract = web3.Eth.GetContract(abi, contractAddress);
     }
 
@@ -90,23 +95,26 @@ public class TokenService
 
     public async void TransferTo(string toAddress)
     {
-        var transferFunction = contract.GetFunction("transfer");
-        int decimals = await GetTokenDecimals();
+        if (!string.IsNullOrEmpty(toAddress))
+        {
+            var transferFunction = contract.GetFunction("transfer");
+            int decimals = await GetTokenDecimals();
 
-        // The smallest transferable value is 1 base unit (smallest unit of the token)
-        // To convert 1 base unit to Wei, divide by 10^decimals.
-        var amountInWei = Web3.Convert.ToWei(1, decimals); // Convert 1 token to the smallest unit
-        // This converts 1 token to base units
+            // The smallest transferable value is 1 base unit (smallest unit of the token)
+            // To convert 1 base unit to Wei, divide by 10^decimals.
+            var amountInWei = Web3.Convert.ToWei(1, decimals); // Convert 1 token to the smallest unit
+            // This converts 1 token to base units
 
-        var gasPrice = Web3.Convert.ToWei(3, EthUnit.Gwei);
-        var gasLimit = 60000; // Limit gazu dla funkcji transfer
+            var gasPrice = Web3.Convert.ToWei(3, EthUnit.Gwei);
+            var gasLimit = 100000; // Limit gazu dla funkcji transfer
 
-        // execute transaction
-        var transactionReceipt = await transferFunction.SendTransactionAndWaitForReceiptAsync(
-            from: account.Address,
-            gas: new HexBigInteger(gasLimit),
-            gasPrice: new HexBigInteger(gasPrice),
-            value: null,
-            functionInput: new object[] { toAddress, amountInWei }); // Send 1 base unit
+            // execute transaction
+            var transactionReceipt = await transferFunction.SendTransactionAndWaitForReceiptAsync(
+                from: account.Address,
+                gas: new HexBigInteger(gasLimit),
+                gasPrice: new HexBigInteger(gasPrice),
+                value: null,
+                functionInput: new object[] { toAddress, amountInWei }); // Send 1 base unit
+        }
     }
 }

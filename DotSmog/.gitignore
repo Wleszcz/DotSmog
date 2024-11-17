@@ -1,12 +1,16 @@
-*.swp
-*.*~
-project.lock.json
-.DS_Store
-*.pyc
-nupkg/
-.env
+# .NET Core build results
+bin/
+obj/
 
-# Visual Studio Code
+# User-specific files
+.idea/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# VSCode
 .vscode/
 
 # Rider
@@ -18,8 +22,17 @@ nupkg/
 # Fleet
 .fleet/
 
-# Code Rush
+# CodeRush
 .cr/
+
+# JetBrains Rider specific folders
+.idea/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
 
 # User-specific files
 *.suo
@@ -42,3 +55,19 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
+
+# ASP.NET and ASP.NET Core files
+wwwroot/
+node_modules/
+*.pdb
+*.cache
+*.vspscc
+.vs2019/
+.vs2017/
+
+# NuGet
+*.nupkg
+*.nuspec
+project.lock.json
+project.fragment.lock.json
+*.csproj.user
