@@ -32,9 +32,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.MapGet("/api/readings", async (string? type, DateTime? date ,
-    Guid? stationUUID) =>
+    string? stationId) =>
     {
-        var documents = await dbConnector.GetDataAsync(QueueConnector.collectionName, type, date, stationUUID);
+        var documents = await dbConnector.GetDataAsync(QueueConnector.collectionName, type, date, stationId);
         Messages messages = new Messages();
         messages.SensorMessages = documents; 
         return Results.Ok(messages);
