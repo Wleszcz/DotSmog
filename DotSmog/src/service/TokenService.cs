@@ -34,7 +34,13 @@ public class TokenService
 
     public TokenService()
     {
-        Env.Load();
+        string isInContainer = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER");
+        if (isInContainer == "FALSE")
+        {
+            //Loading .env file, when in container its loaded automatically
+            Console.WriteLine("App running locally");
+            Env.Load();
+        }
         privateKey =
             Environment.GetEnvironmentVariable("PRIVATE_KEY"); // Klucz prywatny do konta w MetaMask dla sieci Holesky
         if (String.IsNullOrEmpty(privateKey))

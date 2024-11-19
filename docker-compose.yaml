@@ -8,6 +8,8 @@ services:
       dockerfile: DotSmog/Dockerfile
     ports:
      - "5275:8080"
+    env_file:
+     - DotSmog/.env
 
     environment:
      - ASPNETCORE_ENVIRONMENT=Development
