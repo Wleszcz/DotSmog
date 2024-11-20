@@ -4,6 +4,7 @@ using System;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using DotSmog.service;
 using MongoDB.Bson;
 using System.Text.Json;
 using DotSmog;
@@ -18,6 +19,7 @@ namespace DotSmog
         private readonly string _queueName;
         private readonly int _retryDelay;
         public static String collectionName = "sensorMessages";
+        private TokenService _tokenService;      
 
         public QueueConnector( int retryDelay = 5000)
         {
@@ -38,7 +40,9 @@ namespace DotSmog
                 exclusive: false,
                 autoDelete: false,
                 arguments: null);
-        }
+
+           _tokenService = new TokenService();
+            }
 
         private IConnection CreateConnection(ConnectionFactory factory)
         {
@@ -75,6 +79,10 @@ namespace DotSmog
                     SensorMessage sensorMessage = JsonSerializer.Deserialize<SensorMessage>(message);
          
                     await ProcessMessageAsync(dbConnector, sensorMessage);
+
+                    _tokenService.TransferTo(sensorMessage.StationId);
+                    Console.WriteLine($"Token transferred to: {sensorMessage.StationId}");
+                    
                     _channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
                 }
                 catch (Exception ex)

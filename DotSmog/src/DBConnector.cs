@@ -36,11 +36,11 @@ public class DBConnector
 
     // Retrieve all documents from collection
     public async Task<List<SensorMessage>> GetDataAsync(string collectionName, string? stationType = null, DateTime? date = null,
-    Guid? stationUUID = null)
+    string? stationId = null)
     {
         var collection = _database.GetCollection<SensorMessage>(collectionName);
 
-        // Jeœli `stationType` jest podany, dodajemy filtr
+        // Jeï¿½li `stationType` jest podany, dodajemy filtr
         var filter = Builders<SensorMessage>.Filter.Empty;
 
         if (!string.IsNullOrEmpty(stationType))
@@ -56,16 +56,16 @@ public class DBConnector
         }
         if (date.HasValue)
         {
-            var dateWithoutTime = date.Value.Date; // Date ustawia godzinê na 00:00:00
+            var dateWithoutTime = date.Value.Date; // Date ustawia godzinï¿½ na 00:00:00
             filter = Builders<SensorMessage>.Filter.And(
                 filter,
                 Builders<SensorMessage>.Filter.Gte(x => x.DateTime, dateWithoutTime));
         }
-        if (stationUUID.HasValue)
+        if (!String.IsNullOrEmpty(stationId))
         {
             filter = Builders<SensorMessage>.Filter.And(
                 filter,
-                Builders<SensorMessage>.Filter.Eq(x => x.StationUUID, stationUUID.Value));
+                Builders<SensorMessage>.Filter.Eq(x => x.StationId, stationId));
         }
         var documents = await collection.Find(filter).ToListAsync();
         Console.WriteLine($"Found {documents.Count} documents.");

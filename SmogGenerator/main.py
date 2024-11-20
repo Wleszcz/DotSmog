@@ -2,6 +2,7 @@ import json
 import random
 import time
 import uuid
+import time
 from datetime import datetime, timedelta
 from enum import Enum
 import pika
@@ -19,8 +20,8 @@ class Type(Enum):
     TYPE4 = 3
 
 class Station:
-    def __init__(self, stationUUID, st_type, value, last_message):
-        self.stationUUID = stationUUID
+    def __init__(self, stationId, st_type, value, last_message):
+        self.stationId = stationId
         self.type = st_type
         self.value = value
         self.lastMessage = last_message
@@ -34,20 +35,20 @@ class Message:
     def to_JSON(self):
         return {
             'messageUUID': str(self.messageUUID),
-            'stationUUID': str(self.station.stationUUID),
+            'stationId': str(self.station.stationId),
             'dateTime': str(self.dateTime),
             'type': self.station.type.name,
             'value': self.station.value
         }
 
-station_uuids = ['cf7ede9d-eb8e-426f-a101-999d7425c26e', '4ca91a6d-9c17-4b0c-82c0-4399c2f65adb',
-                 '3b2ee09e-f753-4124-b403-f862c3628f88', 'bf8ab9d0-8894-4d0a-9616-7e989add1ef9',
-                 '1b8227fc-7729-4319-b094-1c4afda6d020', '6a5497ae-c8c4-45b0-b233-d9ef1e979837',
-                 '0d952ffe-faca-4c67-ba28-94cc227860c3', '87090854-7b03-4c57-a49e-0d46a35abb0a',
-                 'a139eb4f-8017-4c42-8556-f5f1c33ab041', '710a49a9-39c6-45ab-bc5b-e6cbfa6a240b',
-                 'f959ce51-5e57-4a22-a711-8620324704e4', '8ee1c2a9-cad9-4ffc-af8a-41c66031092e',
-                 '854d1ecd-6fb8-4120-bcb4-e0d34ba2eede', 'c68ee8f2-6345-465c-a00c-2e99c148d7f4',
-                 'cdb05bb6-13a6-48c8-9494-0c675eae79d4', 'ab2bf1e4-3c5d-42df-bd6e-04d5ceba2eecb']
+station_uuids = ['0x30f8131C921E7dcb2e3763d45B6c893C18401345', '0xC800AFd98f1b4B871b54787149cA3BD3874f53Cf',
+                 '0x4E61FbBC81f9E6BA5520b4FdaE779Cbc368F2e47', '0x5aC5504414311a5abe7299F55F7A30eCb010Cd09',
+                 '0xE98e85A65Ed1a6C17977202786c72AE8222EC119', '0xC2dCC02e6498EBB77D83521aFae8749020CfBC7B',
+                 '0x4b33Ae4cFa207f196e3f7788745aF76E26A602D9', '0x133FF2cE0C9995E62674E030e362EC614c132Db4',
+                 '0x5f897C984f4430df26394d53Cf00BC28F8112Eaf', '0xD567a72C8764e0EBDD5311f8b57DBe9997716E81',
+                 '0x812196b8a1FE6B1230926384CF935dFF876C05BE', '0x4978Dc12658Ee8dA8Dc091C12d7f60f1794872Fa',
+                 '0x14f03b5B903067efBe8F275f591B475236c7dCA6', '0x26a3a157E8F3B3568b3C316DC382F0F5C22d3Adc',
+                 '0xe38918a4eC647A3c9668b83D7cB2072C5c50Bd55', '0x749Eb27aECd9aaDEa0717DB7B4fd2E15Eee4d706']
 
 stations = []
 connection = None
@@ -60,6 +61,7 @@ def initConnection():
 
 
 def sendMessage(mess):
+    time.sleep(1)
     global connection
     channel = connection.channel()
     channel.queue_declare(queue='sensorQueue')
@@ -112,7 +114,7 @@ while True:
         if(station_found == None):
             uuid_input = input("Podaj UUID stacji: ")
             for station in stations:
-                if station.stationUUID == uuid_input:
+                if station.stationId == uuid_input:
                     station_found = station
                     break
         if station_found:

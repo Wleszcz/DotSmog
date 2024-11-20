@@ -26,8 +26,8 @@ namespace DotSmog.src
         public Guid MessageUUID { get; set; }
 
         [BsonRepresentation(BsonType.String)]
-        [JsonPropertyName("stationUUID")]
-        public Guid StationUUID { get; set; }
+        [JsonPropertyName("stationId")]
+        public string StationId { get; set; }
 
         [JsonPropertyName("dateTime")]
         public DateTime DateTime { get; set; }
