@@ -79,7 +79,7 @@ namespace DotSmog
                     SensorMessage sensorMessage = JsonSerializer.Deserialize<SensorMessage>(message);
          
                     await ProcessMessageAsync(dbConnector, sensorMessage);
-
+                    await WebSocketConnectionManager.SendToWebSockets(message);
                     _tokenService.TransferTo(sensorMessage.StationId);
                     Console.WriteLine($"Token transferred to: {sensorMessage.StationId}");
                     

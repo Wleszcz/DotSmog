@@ -1,3 +1,4 @@
+using System.Net.WebSockets;
 using System.Numerics;
 using DotSmog;
 using DotSmog.service;
@@ -32,8 +33,24 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseWebSockets();
 
-// Endpoint for sensor readings
+app.MapGet("/socket", async context =>
+{
+    if (context.WebSockets.IsWebSocketRequest)
+    {
+        var webSocket = await context.WebSockets.AcceptWebSocketAsync();
+        WebSocketConnectionManager.AddSocket(webSocket);
+
+        Console.WriteLine("WebSocket connected");
+    }
+    else
+    {
+        context.Response.StatusCode = 400;
+    }
+});
+
+
 app.MapGet("/api/readings", async (string? type, DateTime? date, string? stationId) =>
     {
         var documents = await dbConnector.GetDataAsync(QueueConnector.collectionName, type, date, stationId);
@@ -46,7 +63,7 @@ app.MapGet("/api/readings", async (string? type, DateTime? date, string? station
     .WithName("readings")
     .WithOpenApi();
 
-// Endpoint for balance with path parameter `accountId`
+
 app.MapGet("/api/balance/{accountId}", async (string accountId) =>
     {
         if (string.IsNullOrWhiteSpace(accountId))
