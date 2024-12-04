@@ -17,7 +17,7 @@ public class WebSocketConnectionManager
     private async static Task Receive(WebSocket webSocket)
     {
         var buffer = new byte[1024 * 4];
-
+        Console.WriteLine(sockets.Count);
         while (webSocket.State == WebSocketState.Open)
         {
             try
@@ -26,13 +26,17 @@ public class WebSocketConnectionManager
         
                 if (result.MessageType == WebSocketMessageType.Close)
                 {
-                    // await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", CancellationToken.None);
-                    // sockets.Remove(webSocket);
+                    await webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", CancellationToken.None);
+                    sockets.Remove(webSocket);
+                    break;
                 }
+                var receivedMessage = Encoding.UTF8.GetString(buffer, 0, result.Count);
+                Console.WriteLine($"Received: {receivedMessage}");
+                
+                await SendToWebSockets("Response: " + receivedMessage);
             }
             catch (Exception ex)
             {
-                // Log exception or handle the error gracefully
                 Console.WriteLine($"Error receiving data: {ex.Message}");
                 break;
             }

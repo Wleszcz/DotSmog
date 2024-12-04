@@ -35,7 +35,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseWebSockets();
 
-app.MapGet("/socket", async context =>
+app.MapGet("/", async context =>
 {
     if (context.WebSockets.IsWebSocketRequest)
     {
