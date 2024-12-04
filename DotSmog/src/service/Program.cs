@@ -73,8 +73,14 @@ app.MapGet("/api/balance/{accountId}", async (string accountId) =>
         
         try
         {
-            var balance = await tokenService.GetBalance(accountId);
-            return Results.Ok(balance);
+            BigInteger balance = await tokenService.GetBalance(accountId);
+            int balanceValue = (int)balance;
+            var response = new
+            {
+                stationId = accountId,
+                value = balanceValue
+            };
+            return Results.Ok(response);
         }
         catch (Exception ex)
         {
