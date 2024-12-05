@@ -19,12 +19,15 @@ namespace DotSmog
         private readonly string _queueName;
         private readonly int _retryDelay;
         public static String collectionName = "sensorMessages";
-        private TokenService _tokenService;      
+        private TokenService _tokenService;     
+        private ServiceRealTime _serviceRealTime;
 
-        public QueueConnector( int retryDelay = 5000)
+        public QueueConnector(ServiceRealTime serviceRealTime, int retryDelay = 5000)
         {
             _queueName = Environment.GetEnvironmentVariable("RabbitMQ__QueueName") ?? "sensorQueue";
+            _serviceRealTime = serviceRealTime;
             _retryDelay = retryDelay;
+ ;
 
             var factory = new ConnectionFactory()
             {
@@ -79,7 +82,7 @@ namespace DotSmog
                     SensorMessage sensorMessage = JsonSerializer.Deserialize<SensorMessage>(message);
          
                     await ProcessMessageAsync(dbConnector, sensorMessage);
-                    await WebSocketConnectionManager.SendToWebSockets(message);
+                    _serviceRealTime.AddMessage(sensorMessage);
                     _tokenService.TransferTo(sensorMessage.StationId);
                     Console.WriteLine($"Token transferred to: {sensorMessage.StationId}");
                     

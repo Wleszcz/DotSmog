@@ -1,14 +1,17 @@
 using System.Net.WebSockets;
 using System.Numerics;
+using System.Text.Json;
 using DotSmog;
 using DotSmog.service;
 using DotSmog.src;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using MongoDB.Bson;
 
 var dbConnector = DBConnector.Instance;
 
 
-var queueConnector = new QueueConnector();
+
 var tokenService = new TokenService();
 using var cancellationTokenSource = new CancellationTokenSource();
 Console.CancelKeyPress += (sender, e) =>
@@ -17,14 +20,16 @@ Console.CancelKeyPress += (sender, e) =>
     cancellationTokenSource.Cancel();
 };
 
-queueConnector.StartReceiving(cancellationTokenSource.Token);
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<ServiceRealTime>();
 
 var app = builder.Build();
-
+var queueConnector = new QueueConnector(app.Services.GetRequiredService<ServiceRealTime>());
+queueConnector.StartReceiving(cancellationTokenSource.Token);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -35,21 +40,36 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseWebSockets();
 
-app.MapGet("/", async context =>
-{
-    if (context.WebSockets.IsWebSocketRequest)
-    {
-        var webSocket = await context.WebSockets.AcceptWebSocketAsync();
-        WebSocketConnectionManager.AddSocket(webSocket);
 
-        Console.WriteLine("WebSocket connected");
-    }
-    else
+app.MapGet("/sse", async (HttpContext ctx, ServiceRealTime sensorService) =>
+{
+    ctx.Response.Headers.Append(HeaderNames.ContentType, "text/event-stream");
+    ctx.Response.Headers.Append("Cache-Control", "no-cache");
+    ctx.Response.Headers.Append("Connection", "keep-alive");
+
+    try
     {
-        context.Response.StatusCode = 400;
+        while (!ctx.RequestAborted.IsCancellationRequested)
+        {
+            if (sensorService.DataQueue.TryTake(out var data, TimeSpan.FromSeconds(5)))
+            {
+                await ctx.Response.WriteAsync($"data: ");
+                await JsonSerializer.SerializeAsync(ctx.Response.Body, data);
+                await ctx.Response.WriteAsync("\n\n");
+                await ctx.Response.Body.FlushAsync();
+            }
+            else
+            {
+                // Pauza, jeśli brak danych
+                await Task.Delay(100);
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"SSE connection error: {ex.Message}");
     }
 });
-
 
 app.MapGet("/api/readings", async (string? type, DateTime? date, string? stationId) =>
     {
