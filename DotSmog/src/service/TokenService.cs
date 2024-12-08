@@ -110,9 +110,9 @@ public class TokenService
             var amountInWei = Web3.Convert.ToWei(1, decimals); // Convert 1 token to the smallest unit
             // This converts 1 token to base units
 
-            var gasPrice = Web3.Convert.ToWei(3, EthUnit.Gwei);
+            var gasPrice = await web3.Eth.GasPrice.SendRequestAsync();
             var gasLimit = 100000; // Limit gazu dla funkcji transfer
-
+            
             // execute transaction
             var transactionReceipt = await transferFunction.SendTransactionAndWaitForReceiptAsync(
                 from: account.Address,
@@ -120,7 +120,6 @@ public class TokenService
                 gasPrice: new HexBigInteger(gasPrice),
                 value: null,
                 functionInput: new object[] { toAddress, amountInWei }); // Send 1 base unit
-            Console.WriteLine($"Token transferred to: {account.Address}");
         }
     }
     
