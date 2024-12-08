@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DotSmog")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+40a5752e1a7dce1e5b0bdecd0faf501b258719e5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8caf340e80b33951959665508bf626ce44444e8f")]
 [assembly: System.Reflection.AssemblyProductAttribute("DotSmog")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DotSmog")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

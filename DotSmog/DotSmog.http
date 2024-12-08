@@ -6,4 +6,6 @@ Accept: application/json
 ###
 GET {{DotSmog_HostAddress}}/api/readings
 Accept: application/json
-
+###
+GET {{DotSmog_HostAddress}}/api/data?stationType=TYPE3&sortBy=Value&export=csv
+Accept: application/json

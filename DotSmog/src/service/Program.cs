@@ -112,4 +112,51 @@ app.MapGet("/api/balance/{accountId}", async (string accountId) =>
     .WithName("balance")
     .WithOpenApi();
 
+app.MapGet("/api/data", async (
+        string? stationType, 
+        DateTime? date, 
+        string? stationId, 
+        string? limit, 
+        string? sortBy, 
+        string? sortOrder, 
+        string? export) =>
+    {
+        try
+        {
+            var data = await dbConnector.GetDataAsync(
+                QueueConnector.collectionName, 
+                stationType, 
+                date, 
+                stationId, 
+                limit, 
+                sortBy, 
+                sortOrder);
+
+            // Obsługa eksportu
+            if (!string.IsNullOrEmpty(export))
+            {
+                if (string.Equals(export, "csv", StringComparison.OrdinalIgnoreCase))
+                {
+                    var csvStream = await dbConnector.ExportToCsvAsync(data);
+                    return Results.File(csvStream, "text/csv", "data.csv");
+                }
+
+                if (string.Equals(export, "json", StringComparison.OrdinalIgnoreCase))
+                {
+                    var jsonStream = await dbConnector.ExportToJsonAsync(data);
+                    return Results.File(jsonStream, "application/json", "data.json");
+                }
+
+                return Results.BadRequest("Invalid export type. Please use 'csv' or 'json'.");
+            }
+            return Results.Ok(data);
+        }
+        catch (Exception ex)
+        {
+            return Results.Problem(ex.Message);
+        }
+    })
+    .WithName("data")
+    .WithOpenApi();
+
 app.Run();
