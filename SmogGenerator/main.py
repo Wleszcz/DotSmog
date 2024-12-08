@@ -61,7 +61,7 @@ def initConnection():
 
 
 def sendMessage(mess):
-    time.sleep(4)
+    time.sleep(10)
     global connection
     channel = connection.channel()
     channel.queue_declare(queue='sensorQueue')

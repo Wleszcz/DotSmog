@@ -83,7 +83,7 @@ namespace DotSmog
          
                     await ProcessMessageAsync(dbConnector, sensorMessage);
                     _serviceRealTime.AddMessage(sensorMessage);
-                    _tokenService.TransferTo(sensorMessage.StationId);
+                    await _tokenService.TransferTo(sensorMessage.StationId);
                     Console.WriteLine($"Token transferred to: {sensorMessage.StationId}");
                     
                     _channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
