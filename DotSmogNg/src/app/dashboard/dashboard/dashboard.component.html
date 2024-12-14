@@ -49,15 +49,15 @@
         <mat-label>Sensor Instance</mat-label>
         <mat-select
           id="sensor-instance-filter"
-          [(ngModel)]="stationUUIDFilter"
+          [(ngModel)]="stationIdFilter"
           (selectionChange)="fetchReadings()"
         >
           <mat-option value="">All</mat-option>
           <mat-option
-            *ngFor="let stationUUID of uniqueStationUUIDs"
-            [value]="stationUUID"
+            *ngFor="let stationId of uniquestationIds"
+            [value]="stationId"
           >
-            {{ stationUUID }}
+            {{ stationId }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -82,10 +82,10 @@
           <th mat-header-cell *matHeaderCellDef>Sensor Type</th>
           <td mat-cell *matCellDef="let element">{{ element.type }}</td>
         </ng-container>
-        <ng-container matColumnDef="stationUUID">
+        <ng-container matColumnDef="stationId">
           <th mat-header-cell *matHeaderCellDef>Sensor Instance</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.stationUUID }}
+            {{ element.stationId }}
           </td>
         </ng-container>
         <ng-container matColumnDef="value">

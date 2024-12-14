@@ -94,3 +94,6 @@ node_modules/
 project.lock.json
 project.fragment.lock.json
 *.csproj.user
+
+#.env file
+.env

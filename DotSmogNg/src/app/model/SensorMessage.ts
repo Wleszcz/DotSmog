@@ -1,6 +1,6 @@
 export interface SensorMessage {
   messageUUID: string;
-  stationUUID: string;
+  stationId: string;
   dateTime: string;
   type: string;
   value: number;

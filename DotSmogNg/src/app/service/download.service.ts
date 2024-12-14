@@ -36,7 +36,7 @@ export class DownloadService {
     const rows = data.map((message) => [
       message.dateTime,
       message.type,
-      message.stationUUID,
+      message.stationId,
       message.value,
     ]);
 

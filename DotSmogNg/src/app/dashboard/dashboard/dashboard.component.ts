@@ -34,15 +34,15 @@ import 'chartjs-adapter-date-fns';
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent implements AfterViewInit {
-  displayedColumns: string[] = ['stationUUID', 'type', 'date', 'value'];
+  displayedColumns: string[] = ['stationId', 'type', 'date', 'value'];
   sensorMessages: SensorMessage[] = [];
-  uniqueStationUUIDs: string[] = [];
+  uniquestationIds: string[] = [];
   dataSource = new MatTableDataSource<SensorMessage>(this.sensorMessages);
   chart: Chart<'line'> | undefined;
 
   dateFilter: string = '';
   typeFilter: string = '';
-  stationUUIDFilter: string = '';
+  stationIdFilter: string = '';
 
   private readingsService = inject(ReadingsService);
   private downloadService = inject(DownloadService);
@@ -68,7 +68,7 @@ export class DashboardComponent implements AfterViewInit {
       .getReadings(
         this.typeFilter,
         this.convertDate(this.dateFilter),
-        this.stationUUIDFilter
+        this.stationIdFilter
       )
       .subscribe({
         next: (response: Messages) => {
@@ -79,8 +79,8 @@ export class DashboardComponent implements AfterViewInit {
           this.sensorMessages.map((msg) => {
             msg.dateTime = this.convertDate(msg.dateTime);
           });
-          this.uniqueStationUUIDs = Array.from(
-            new Set(this.sensorMessages.map((msg) => msg.stationUUID))
+          this.uniquestationIds = Array.from(
+            new Set(this.sensorMessages.map((msg) => msg.stationId))
           );
           this.updateChartData();
           if (this.chart) {
@@ -99,7 +99,7 @@ export class DashboardComponent implements AfterViewInit {
     this.dataSource.filter = JSON.stringify({
       date: this.dateFilter,
       type: this.typeFilter,
-      stationUUID: this.stationUUIDFilter,
+      stationId: this.stationIdFilter,
     });
   }
 
@@ -108,7 +108,7 @@ export class DashboardComponent implements AfterViewInit {
     return (
       (!filterObj.date || data.dateTime.startsWith(filterObj.date)) &&
       (!filterObj.type || data.type === filterObj.type) &&
-      (!filterObj.stationUUID || data.stationUUID === filterObj.stationUUID)
+      (!filterObj.stationId || data.stationId === filterObj.stationId)
     );
   }
 
