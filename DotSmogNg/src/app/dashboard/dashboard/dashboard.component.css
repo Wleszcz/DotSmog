@@ -1,0 +1,74 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.dashboard-header {
+  background-color: #4caf50;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f4f4f4;
+}
+
+.filters,
+.data-table,
+.download-options,
+.charts,
+.real-time-data {
+  margin-bottom: 2rem;
+}
+
+.filters label,
+.filters select,
+.filters input {
+  margin-right: 1rem;
+}
+
+.data-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.data-table th {
+  background-color: #4caf50;
+  color: white;
+}
+
+.download-options button {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.download-options button:hover {
+  background-color: #45a049;
+}
+
+.charts {
+  max-width: 50%;
+  max-height: 30%;
+}
+
+.real-time-data .sensor-data {
+  background-color: #fff;
+  padding: 1rem;
+  border: 1px solid #ddd;
+}

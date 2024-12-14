@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   # .NET App
@@ -27,13 +27,24 @@ services:
      - rabbitmq
      - mongo
 
+  # Angular
+  angular:
+    build:
+      context: ./DotSmogNg
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    depends_on:
+      - rabbitmq
+      - mongo
+
   # RabbitMQ
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
     ports:
-      - "5672:5672"  # Port for AMQP communication
-      - "15672:15672"  # Port for admin panel
+      - "5672:5672" # Port for AMQP communication
+      - "15672:15672" # Port for admin panel
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest

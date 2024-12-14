@@ -11,6 +11,19 @@ obj/*
 *.sln.docstates
 
 # VSCode
+# .NET Core build results
+bin/*
+obj/*
+
+# User-specific files
+.idea/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# VSCode
 .vscode/
 
 # Rider
@@ -23,7 +36,17 @@ obj/*
 .fleet/
 
 # CodeRush
+# CodeRush
 .cr/
+
+# JetBrains Rider specific folders
+.idea/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
 
 # JetBrains Rider specific folders
 .idea/
