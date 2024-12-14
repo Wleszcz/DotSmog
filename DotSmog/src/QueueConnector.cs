@@ -19,14 +19,15 @@ namespace DotSmog
         private readonly string _queueName;
         private readonly int _retryDelay;
         public static String collectionName = "sensorMessages";
-        private TokenService _tokenService;     
         private ServiceRealTime _serviceRealTime;
+        private TransferQueueProcessor _transferQueueProcessor;
 
         public QueueConnector(ServiceRealTime serviceRealTime, int retryDelay = 5000)
         {
             _queueName = Environment.GetEnvironmentVariable("RabbitMQ__QueueName") ?? "sensorQueue";
             _serviceRealTime = serviceRealTime;
             _retryDelay = retryDelay;
+            _transferQueueProcessor = new TransferQueueProcessor( 3)
  ;
 
             var factory = new ConnectionFactory()
@@ -43,8 +44,7 @@ namespace DotSmog
                 exclusive: false,
                 autoDelete: false,
                 arguments: null);
-
-           _tokenService = new TokenService();
+            
             }
 
         private IConnection CreateConnection(ConnectionFactory factory)
@@ -83,7 +83,7 @@ namespace DotSmog
          
                     await ProcessMessageAsync(dbConnector, sensorMessage);
                     _serviceRealTime.AddMessage(sensorMessage);
-                    await _tokenService.TransferTo(sensorMessage.StationId);
+                    _transferQueueProcessor.EnqueueTransfer(sensorMessage.StationId);
                     Console.WriteLine($"Token transferred to: {sensorMessage.StationId}");
                     
                     _channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
