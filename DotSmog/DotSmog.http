@@ -1,4 +1,11 @@
-@DotSmog_HostAddress = http://localhost:5000
+@DotSmog_HostAddress = http://localhost:5275
 
 GET {{DotSmog_HostAddress}}/api/balance/0x30f8131C921E7dcb2e3763d45B6c893C18401345
+Accept: application/json
+
+###
+GET {{DotSmog_HostAddress}}/api/readings
+Accept: application/json
+###
+GET {{DotSmog_HostAddress}}/api/data?stationType=TYPE3&sortBy=Value&export=csv
 Accept: application/json
