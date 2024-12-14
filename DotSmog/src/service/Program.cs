@@ -48,9 +48,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("AllowLocalhost");
-
-app.MapGet("/api/readings", async (string? type, DateTime? date ,
-    Guid? stationUUID) =>
 app.UseWebSockets();
 
 
