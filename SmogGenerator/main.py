@@ -61,7 +61,7 @@ def initConnection():
 
 
 def sendMessage(mess):
-    time.sleep(1)
+    time.sleep(10)
     global connection
     channel = connection.channel()
     channel.queue_declare(queue='sensorQueue')
@@ -110,6 +110,7 @@ while True:
             station.value = random.randint(0, 30)
             setLastMessage(station)
             sendMessage(prepareMessage(station, station.lastMessage))
+
     elif user_input == 's':
         if(station_found == None):
             uuid_input = input("Podaj UUID stacji: ")

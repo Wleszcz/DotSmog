@@ -1,3 +1,5 @@
+using System.Collections.Concurrent;
+
 namespace DotSmog.service;
 
 using System;
@@ -27,7 +29,7 @@ public class TokenService
     private static string infuraUrl = "https://holesky.infura.io/v3/ca497ee51f654018a387e2a04966f11c";
     private static string? privateKey;
     private static string contractAddress = "0xefE3024ed92309139f2551c638f404CfcbD3dbC0"; // Adres kontraktu tokenu
-
+    private int? _cachedTokenDecimals = null;
     Account account;
     Web3 web3;
     Contract contract;
@@ -56,7 +58,7 @@ public class TokenService
 
         contract = web3.Eth.GetContract(abi, contractAddress);
     }
-
+    
     public async Task<string> GetTokenName()
     {
         var nameFunction = contract.GetFunction("name");
@@ -71,8 +73,11 @@ public class TokenService
 
     public async Task<int> GetTokenDecimals()
     {
-        var decimalsFunction = contract.GetFunction("decimals");
-        return await decimalsFunction.CallAsync<int>();
+        if (_cachedTokenDecimals.HasValue)
+            return _cachedTokenDecimals.Value;
+
+        _cachedTokenDecimals = await contract.GetFunction("decimals").CallAsync<int>();
+        return _cachedTokenDecimals.Value;
     }
 
     public async Task<BigInteger> GetTokenTotalSupply()
@@ -93,7 +98,7 @@ public class TokenService
         return balance / BigInteger.Pow(10, decimals); // Divide by 10^6 to adjust for decimal
     }
 
-    public async void TransferTo(string toAddress)
+    public async Task TransferTo(string toAddress)
     {
         if (!string.IsNullOrEmpty(toAddress))
         {
@@ -105,9 +110,9 @@ public class TokenService
             var amountInWei = Web3.Convert.ToWei(1, decimals); // Convert 1 token to the smallest unit
             // This converts 1 token to base units
 
-            var gasPrice = Web3.Convert.ToWei(3, EthUnit.Gwei);
+            var gasPrice = await web3.Eth.GasPrice.SendRequestAsync();
             var gasLimit = 100000; // Limit gazu dla funkcji transfer
-
+            
             // execute transaction
             var transactionReceipt = await transferFunction.SendTransactionAndWaitForReceiptAsync(
                 from: account.Address,
@@ -117,4 +122,5 @@ public class TokenService
                 functionInput: new object[] { toAddress, amountInWei }); // Send 1 base unit
         }
     }
+    
 }
