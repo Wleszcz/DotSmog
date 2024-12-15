@@ -39,4 +39,5 @@ namespace DotSmog.src
         [JsonPropertyName("value")]
         public double Value { get; set; }
     }
+
 }

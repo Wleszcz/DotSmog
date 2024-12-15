@@ -108,6 +108,53 @@
         [pageSizeOptions]="[5, 10, 25, 100]"
       ></mat-paginator>
     </section>
+    <mat-form-field appearance="fill" style="width: 50%">
+      <mat-label>Check Station Balance</mat-label>
+      <mat-select
+        id="sensor-instance-filter"
+        [(ngModel)]="stationIdFilter"
+        (selectionChange)="checkStationBalance(stationIdFilter)"
+      >
+        <mat-option
+          *ngFor="let stationId of uniquestationIds"
+          [value]="stationId"
+        >
+          {{ stationId }}
+        </mat-option>
+      </mat-select>
+      <section *ngIf="sensorBalance" class="station-balance">
+        <p>
+          The balance for the selected station is: {{ sensorBalance.value }}
+        </p>
+      </section>
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="width: 50%">
+      <mat-label>Real-Time Data</mat-label>
+      <mat-select
+        id="sensor-instance-filter"
+        [(ngModel)]="stationIdFilter"
+        (selectionChange)="checkStationRealTimeData(stationIdFilter)"
+      >
+        <mat-option
+          *ngFor="let stationId of uniquestationWithDataIds"
+          [value]="stationId"
+        >
+          {{ stationId }}
+        </mat-option>
+      </mat-select>
+      <section
+        *ngIf="selectedSensorRealTimeData"
+        class="station-real-time-data"
+      >
+        <p>
+          Last Value: <span>{{ selectedSensorRealTimeData.lastValue }}</span>
+        </p>
+        <p>
+          Average Value (last 100):
+          <span>{{ selectedSensorRealTimeData.averageValue }}</span>
+        </p>
+      </section>
+    </mat-form-field>
     <section class="download-options">
       <h2>Download Data</h2>
       <button id="download-csv" (click)="downloadCSV()">Download CSV</button>
@@ -118,13 +165,25 @@
       <canvas id="linechart"></canvas>
       <!-- Chart elements go here -->
     </section>
-    <section class="real-time-data">
+    <!-- <section class="real-time-data">
       <h2>Real-Time Data</h2>
-      <div class="sensor-data">
-        <p>Last Value: <span id="last-value">N/A</span></p>
-        <p>Average Value (last 100): <span id="average-value">N/A</span></p>
-      </div>
-    </section>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let sensor of sensorDataMap | keyvalue">
+          <mat-expansion-panel-header>
+            <mat-panel-title> Sensor ID: {{ sensor.key }} </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="sensor-data">
+            <p>
+              Last Value: <span>{{ sensor.value.lastValue }}</span>
+            </p>
+            <p>
+              Average Value (last 100):
+              <span>{{ sensor.value.averageValue }}</span>
+            </p>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </section> -->
   </main>
   <footer class="dashboard-footer">
     <p>&copy; 2024 DotSmog</p>

@@ -11,9 +11,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { Chart, ChartData, ChartOptions, registerables } from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
+import { SensorBalance } from '../../model/SensorBalance';
+import { SensorRealTimeData } from '../../model/SensorRealTimeData';
+import { Subscription } from 'rxjs';
+import { SseService } from '../../service/sse.service';
+import { DataService } from '../../service/data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,8 +34,9 @@ import 'chartjs-adapter-date-fns';
     MatInputModule,
     MatFormFieldModule,
     MatDatepickerModule,
+    MatExpansionModule,
   ],
-  providers: [provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter(), DatePipe],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -37,20 +44,37 @@ export class DashboardComponent implements AfterViewInit {
   displayedColumns: string[] = ['stationId', 'type', 'date', 'value'];
   sensorMessages: SensorMessage[] = [];
   uniquestationIds: string[] = [];
+  uniquestationWithDataIds: string[] = [];
   dataSource = new MatTableDataSource<SensorMessage>(this.sensorMessages);
   chart: Chart<'line'> | undefined;
-
+  sensorBalance: SensorBalance | undefined;
+  selectedSensorRealTimeData:
+    | { lastValue: number; averageValue: number }
+    | undefined;
   dateFilter: string = '';
   typeFilter: string = '';
   stationIdFilter: string = '';
+  chartData: ChartData<'line'> = { labels: [], datasets: [] };
 
-  private readingsService = inject(ReadingsService);
-  private downloadService = inject(DownloadService);
+  public sensorDataMap: {
+    [stationId: string]: { lastValue: number; averageValue: number };
+  } = {};
+  private sseSubscription: Subscription | undefined;
+  public realTimeData: any;
+
+  // private readingsService = inject(ReadingsService);
+  // private downloadService = inject(DownloadService);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
+  constructor(
+    private readingsService: ReadingsService,
+    private downloadService: DownloadService,
+    private sseService: SseService,
+    private dataService: DataService,
+    private datePipe: DatePipe
+  ) {
     Chart.register(...registerables);
   }
 
@@ -59,7 +83,32 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   ngOnInit() {
+    this.sseSubscription = this.sseService
+      .getServerSentEvent()
+      .subscribe((data) => {
+        this.realTimeData = data;
+        this.updateSensorData(data);
+        this.uniquestationWithDataIds = Array.from(
+          new Set(
+            Object.keys(this.sensorDataMap).filter((key) => {
+              const data = this.sensorDataMap[key];
+              return (
+                data &&
+                (data.lastValue !== undefined ||
+                  data.averageValue !== undefined)
+              );
+            })
+          )
+        );
+        console.log('Received real-time data:', data);
+      });
     //this.dataSource.filterPredicate = this.applyCustomFilter.bind(this);
+  }
+
+  ngOnDestroy() {
+    if (this.sseSubscription) {
+      this.sseSubscription.unsubscribe();
+    }
   }
 
   fetchReadings(): void {
@@ -83,9 +132,7 @@ export class DashboardComponent implements AfterViewInit {
             new Set(this.sensorMessages.map((msg) => msg.stationId))
           );
           this.updateChartData();
-          if (this.chart) {
-            this.chart.update();
-          } else {
+          if (!this.chart) {
             this.renderChart();
           }
         },
@@ -112,12 +159,74 @@ export class DashboardComponent implements AfterViewInit {
     );
   }
 
+  // downloadCSV(): void {
+  //   this.downloadService.downloadCSV(this.dataSource.filteredData);
+  // }
+
+  // downloadJSON(): void {
+  //   this.downloadService.downloadJSON(this.dataSource.filteredData);
+  // }
+
   downloadCSV(): void {
-    this.downloadService.downloadCSV(this.dataSource.filteredData);
+    const formattedDate = this.datePipe.transform(
+      this.dateFilter,
+      'yyyy-MM-ddTHH:mm:ss'
+    );
+    this.dataService
+      .exportData(
+        'csv',
+        this.typeFilter,
+        formattedDate ? formattedDate : '',
+        this.stationIdFilter
+      )
+      .subscribe(
+        (blob) => {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'data.csv';
+          a.click();
+          window.URL.revokeObjectURL(url);
+        },
+        (error) => {
+          if (error.status == 404) {
+            alert('No data found for the selected filters');
+          } else {
+            console.error('Error downloading data: ', error);
+          }
+        }
+      );
   }
 
   downloadJSON(): void {
-    this.downloadService.downloadJSON(this.dataSource.filteredData);
+    const formattedDate = this.datePipe.transform(
+      this.dateFilter,
+      'yyyy-MM-ddTHH:mm:ss'
+    );
+    this.dataService
+      .exportData(
+        'json',
+        this.typeFilter,
+        formattedDate ? formattedDate : '',
+        this.stationIdFilter
+      )
+      .subscribe(
+        (blob) => {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'data.json';
+          a.click();
+          window.URL.revokeObjectURL(url);
+        },
+        (error) => {
+          if (error.status == 404) {
+            alert('No data found for the selected filters');
+          } else {
+            console.error('Error downloading data: ', error);
+          }
+        }
+      );
   }
 
   convertDate(date: string): string {
@@ -128,9 +237,8 @@ export class DashboardComponent implements AfterViewInit {
     return new Date(date);
   }
 
-  chartData: ChartData<'line'> = { labels: [], datasets: [] };
-
   updateChartData(): void {
+    console.log('data: ', this.dataSource.filteredData);
     const filteredData = this.dataSource.filteredData;
     this.chartData = {
       labels: filteredData.map((data) => data.dateTime),
@@ -143,6 +251,11 @@ export class DashboardComponent implements AfterViewInit {
         },
       ],
     };
+
+    if (this.chart) {
+      this.chart.data = this.chartData;
+      this.chart.update('active');
+    }
   }
 
   renderChart(): void {
@@ -154,5 +267,35 @@ export class DashboardComponent implements AfterViewInit {
         options: {},
       });
     }
+  }
+
+  checkStationBalance(stationId: string): void {
+    this.readingsService.getBalance(stationId).subscribe({
+      next: (response: SensorBalance) => {
+        this.sensorBalance = response;
+        console.log(`Station ${stationId} has a balance of ${response.value}`);
+      },
+      error: (error) => {
+        console.error('Error fetching balance:', error);
+      },
+    });
+  }
+
+  checkStationRealTimeData(stationId: string): void {
+    this.selectedSensorRealTimeData = this.sensorDataMap[stationId];
+  }
+
+  private updateSensorData(data: SensorRealTimeData): void {
+    const stationId = data.stationId;
+    if (!this.sensorDataMap[stationId]) {
+      this.sensorDataMap[stationId] = {
+        lastValue: 0,
+        averageValue: 0,
+      };
+    }
+
+    const sensorData = this.sensorDataMap[stationId];
+    sensorData.lastValue = data.lastValue;
+    sensorData.averageValue = data.averageValue;
   }
 }

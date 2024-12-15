@@ -13,11 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DotSmog")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+590270d2a132557d454c3bba4f9557bd2793b27e")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f89d9b7b28fa610bf9d4ec10c369ba3a2450769")]
->>>>>>> origin/21-websockets
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b813dcba421e5ffeffdc1e430fe567fc9ef37c19")]
 [assembly: System.Reflection.AssemblyProductAttribute("DotSmog")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DotSmog")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,13 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Messages, SensorMessage } from '../model/SensorMessage';
+import { SensorBalance } from '../model/SensorBalance';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReadingsService {
-  private apiUrl = 'http://localhost:5275/api/readings'; // URL do API
+  private apiUrl = 'http://localhost:5275/api'; // URL do API
   private http = inject(HttpClient);
 
   constructor() {}
@@ -23,6 +24,12 @@ export class ReadingsService {
     if (date) params = params.set('date', date);
     if (stationId) params = params.set('stationId', stationId);
 
-    return this.http.get<Messages>(this.apiUrl, { params });
+    return this.http.get<Messages>(this.apiUrl + '/readings', { params });
+  }
+
+  getBalance(accountId: string): Observable<SensorBalance> {
+    return this.http.get<SensorBalance>(
+      this.apiUrl + '/balance' + `/${accountId}`
+    );
   }
 }
