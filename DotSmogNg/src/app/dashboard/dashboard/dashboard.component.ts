@@ -43,10 +43,12 @@ import { DataService } from '../../service/data.service';
 export class DashboardComponent implements AfterViewInit {
   displayedColumns: string[] = ['stationId', 'type', 'date', 'value'];
   sensorMessages: SensorMessage[] = [];
+  unfilteredSensorMessages: SensorMessage[] = [];
   uniquestationIds: string[] = [];
   uniquestationWithDataIds: string[] = [];
-  dataSource = new MatTableDataSource<SensorMessage>(this.sensorMessages);
+  dataSource = new MatTableDataSource<any>(this.sensorMessages);
   chart: Chart<'line'> | undefined;
+  charts: { [key: string]: Chart } = {};
   sensorBalance: SensorBalance | undefined;
   selectedSensorRealTimeData:
     | { lastValue: number; averageValue: number }
@@ -63,9 +65,6 @@ export class DashboardComponent implements AfterViewInit {
   } = {};
   private sseSubscription: Subscription | undefined;
   public realTimeData: any;
-
-  // private readingsService = inject(ReadingsService);
-  // private downloadService = inject(DownloadService);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -85,6 +84,18 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   ngOnInit() {
+    this.readingsService.getReadings().subscribe({
+      next: (response: Messages) => {
+        this.unfilteredSensorMessages = response.sensorMessages;
+        this.unfilteredSensorMessages.map((msg) => {
+          msg.dateTime = this.convertDate(msg.dateTime);
+        });
+      },
+      error: (error) => {
+        console.error('Error fetching readings:', error);
+      },
+    });
+
     this.sseSubscription = this.sseService
       .getServerSentEvent()
       .subscribe((data) => {
@@ -102,9 +113,7 @@ export class DashboardComponent implements AfterViewInit {
             })
           )
         );
-        console.log('Received real-time data:', data);
       });
-    //this.dataSource.filterPredicate = this.applyCustomFilter.bind(this);
   }
 
   ngOnDestroy() {
@@ -114,7 +123,6 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   fetchReadings(): void {
-    console.log(this.dateFilter);
     this.readingsService
       .getReadings(
         this.typeFilter,
@@ -125,18 +133,27 @@ export class DashboardComponent implements AfterViewInit {
         next: (response: Messages) => {
           this.sensorMessages = response.sensorMessages;
           this.dataSource.data = this.sensorMessages;
+          this.dataSource.sortingDataAccessor = (item, property) => {
+            switch (property) {
+              case 'date':
+                return new Date(item.dateTime);
+              default:
+                return item[property];
+            }
+          };
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
-          this.sensorMessages.map((msg) => {
-            msg.dateTime = this.convertDate(msg.dateTime);
-          });
           this.uniquestationIds = Array.from(
-            new Set(this.sensorMessages.map((msg) => msg.stationId))
+            new Set(this.unfilteredSensorMessages.map((msg) => msg.stationId))
           );
-          this.updateChartData();
+          if (Object.keys(this.charts).length === 0) {
+            this.renderCharts();
+          }
           if (!this.chart) {
             this.renderChart();
           }
+          this.updateCharts();
+          this.updateChartData();
         },
         error: (error) => {
           console.error('Error fetching readings:', error);
@@ -160,14 +177,6 @@ export class DashboardComponent implements AfterViewInit {
       (!filterObj.stationId || data.stationId === filterObj.stationId)
     );
   }
-
-  // downloadCSV(): void {
-  //   this.downloadService.downloadCSV(this.dataSource.filteredData);
-  // }
-
-  // downloadJSON(): void {
-  //   this.downloadService.downloadJSON(this.dataSource.filteredData);
-  // }
 
   downloadCSV(): void {
     const formattedDate = this.datePipe.transform(
@@ -232,7 +241,7 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   convertDate(date: string): string {
-    return new DatePipe('en-US').transform(date, 'MM-dd-yyyy') || '';
+    return new DatePipe('en-US').transform(date, 'MM-dd-yyyy HH:mm:ss') || '';
   }
 
   convertStringToDate(date: string): Date {
@@ -240,7 +249,6 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   updateChartData(): void {
-    console.log('data: ', this.dataSource.filteredData);
     const filteredData = this.dataSource.filteredData;
     this.chartData = {
       labels: filteredData.map((data) => data.dateTime),
@@ -256,8 +264,48 @@ export class DashboardComponent implements AfterViewInit {
 
     if (this.chart) {
       this.chart.data = this.chartData;
-      this.chart.update('active');
+      this.chart.update();
     }
+  }
+
+  updateCharts(): void {
+    const types = ['TYPE1', 'TYPE2', 'TYPE3', 'TYPE4'];
+    types.forEach((type) => {
+      if (this.charts[type]) {
+        const filteredData = Object.values(
+          this.unfilteredSensorMessages
+        ).filter((data) => data.type === type);
+        const labels = filteredData.map((data) => data.dateTime);
+        const data = filteredData.map((data) => data.value);
+
+        this.charts[type].data.labels = labels;
+        this.charts[type].data.datasets[0].data = data;
+        this.charts[type].update();
+      }
+    });
+  }
+
+  renderCharts(): void {
+    const types = ['TYPE1', 'TYPE2', 'TYPE3', 'TYPE4'];
+    types.forEach((type) => {
+      const ctx = document.getElementById(
+        `linechart-${type}`
+      ) as HTMLCanvasElement;
+      this.charts[type] = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: [],
+          datasets: [
+            {
+              label: `Sensor Value - ${type}`,
+              data: [],
+              borderColor: '#42A5F5',
+              fill: false,
+            },
+          ],
+        },
+      });
+    });
   }
 
   renderChart(): void {
