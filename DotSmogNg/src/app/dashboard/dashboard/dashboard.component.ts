@@ -54,6 +54,8 @@ export class DashboardComponent implements AfterViewInit {
   dateFilter: string = '';
   typeFilter: string = '';
   stationIdFilter: string = '';
+  stationIdBalanceFilter: string = '';
+  stationIdRealTimeDataFilter: string = '';
   chartData: ChartData<'line'> = { labels: [], datasets: [] };
 
   public sensorDataMap: {

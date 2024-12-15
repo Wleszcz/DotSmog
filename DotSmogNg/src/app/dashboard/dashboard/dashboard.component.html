@@ -111,9 +111,9 @@
     <mat-form-field appearance="fill" style="width: 50%">
       <mat-label>Check Station Balance</mat-label>
       <mat-select
-        id="sensor-instance-filter"
-        [(ngModel)]="stationIdFilter"
-        (selectionChange)="checkStationBalance(stationIdFilter)"
+        id="sensor-instance-station-balance-filter"
+        [(ngModel)]="stationIdBalanceFilter"
+        (selectionChange)="checkStationBalance(stationIdBalanceFilter)"
       >
         <mat-option
           *ngFor="let stationId of uniquestationIds"
@@ -131,9 +131,11 @@
     <mat-form-field appearance="fill" style="width: 50%">
       <mat-label>Real-Time Data</mat-label>
       <mat-select
-        id="sensor-instance-filter"
-        [(ngModel)]="stationIdFilter"
-        (selectionChange)="checkStationRealTimeData(stationIdFilter)"
+        id="sensor-instance-real-time-data-filter"
+        [(ngModel)]="stationIdRealTimeDataFilter"
+        (selectionChange)="
+          checkStationRealTimeData(stationIdRealTimeDataFilter)
+        "
       >
         <mat-option
           *ngFor="let stationId of uniquestationWithDataIds"
