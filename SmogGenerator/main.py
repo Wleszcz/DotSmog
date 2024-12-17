@@ -11,7 +11,7 @@ USERNAME = 'guest'
 PASSWORD = 'guest'
 PORT = 5672
 
-startDate = datetime(2024, 10, 20)
+startDate = datetime(2024, 11, 20)
 
 class Type(Enum):
     TYPE1 = 0
@@ -61,7 +61,7 @@ def initConnection():
 
 
 def sendMessage(mess):
-    time.sleep(10)
+    time.sleep(1)
     global connection
     channel = connection.channel()
     channel.queue_declare(queue='sensorQueue')
@@ -84,13 +84,13 @@ def prepareMessage(station, dateTime):
 
 def setLastMessage(station):
     if station.type == Type.TYPE1:
-        station.lastMessage = station.lastMessage + timedelta(hours=1)
-    elif station.type == Type.TYPE2:
-        station.lastMessage = station.lastMessage + timedelta(hours=2)
-    elif station.type == Type.TYPE3:
-        station.lastMessage = station.lastMessage + timedelta(hours=3)
-    elif station.type == Type.TYPE4:
         station.lastMessage = station.lastMessage + timedelta(hours=4)
+    elif station.type == Type.TYPE2:
+        station.lastMessage = station.lastMessage + timedelta(hours=6)
+    elif station.type == Type.TYPE3:
+        station.lastMessage = station.lastMessage + timedelta(hours=8)
+    elif station.type == Type.TYPE4:
+        station.lastMessage = station.lastMessage + timedelta(hours=10)
 
 initStations()
 initConnection()
